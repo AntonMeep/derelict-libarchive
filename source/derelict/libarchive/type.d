@@ -2,6 +2,9 @@ module derelict.libarchive.type;
 
 import std.conv : octal;
 public import core.sys.posix.sys.types : mode_t, dev_t, time_t;
+public import core.stdc.stddef : wchar_t;
+public import core.stdc.stdio : FILE;
+version(Windows) public import core.sys.windows.winbase : BY_HANDLE_FILE_INFORMATION;
 
 extern(C) nothrow:
 

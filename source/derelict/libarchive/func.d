@@ -3,9 +3,6 @@ module derelict.libarchive.func;
 import derelict.libarchive.type;
 import derelict.util.loader;
 import derelict.util.system;
-import core.stdc.stddef : wchar_t;
-import core.stdc.stdio : FILE;
-version(Windows) import core.sys.windows.winbase : BY_HANDLE_FILE_INFORMATION;
 
 extern(C) @system @nogc nothrow {
 	// archive.h
