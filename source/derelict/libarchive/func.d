@@ -17,22 +17,6 @@ extern(C) @system @nogc nothrow {
 	alias da_archive_bzlib_version = const(char)* function();
 	alias da_archive_liblz4_version = const(char)* function();
 	alias da_archive_read_new = archive* function();
-
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		alias da_archive_read_support_compression_all = int function(archive*);
-		alias da_archive_read_support_compression_bzip2 = int function(archive*);
-		alias da_archive_read_support_compression_compress = int function(archive*);
-		alias da_archive_read_support_compression_gzip = int function(archive*);
-		alias da_archive_read_support_compression_lzip = int function(archive*);
-		alias da_archive_read_support_compression_lzma = int function(archive*);
-		alias da_archive_read_support_compression_none = int function(archive*);
-		alias da_archive_read_support_compression_program = int function(archive*,const(char)*);
-		alias da_archive_read_support_compression_program_signature = int function(archive*,const(char)*,const(void)*,size_t);
-
-		alias da_archive_read_support_compression_rpm = int function(archive*);
-		alias da_archive_read_support_compression_uu = int function(archive*);
-		alias da_archive_read_support_compression_xz = int function(archive*);
-	}
 	alias da_archive_read_support_filter_all = int function(archive*);
 	alias da_archive_read_support_filter_bzip2 = int function(archive*);
 	alias da_archive_read_support_filter_compress = int function(archive*);
@@ -89,7 +73,6 @@ extern(C) @system @nogc nothrow {
 	alias da_archive_read_open_filename = int function(archive*,const(char)*,size_t);
 	alias da_archive_read_open_filenames = int function(archive*,const(char)**,size_t);
 	alias da_archive_read_open_filename_w = int function(archive*,const(wchar_t)*,size_t);
-	alias da_archive_read_open_file = int function(archive*,const(char)*,size_t);
 	alias da_archive_read_open_memory = int function(archive*,const(void)*,size_t);
 	alias da_archive_read_open_memory2 = int function(archive*,const(void)*,size_t,size_t);
 	alias da_archive_read_open_fd = int function(archive*,int,size_t);
@@ -116,25 +99,12 @@ extern(C) @system @nogc nothrow {
 	alias da_archive_read_extract_set_skip_file = void function(archive*,la_int64_t,la_int64_t);
 	alias da_archive_read_close = int function(archive*);
 	alias da_archive_read_free = int function(archive*);
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		alias da_archive_read_finish = int function(archive*);
-	}
 	alias da_archive_write_new = archive* function();
 	alias da_archive_write_set_bytes_per_block = int function(archive*,int);
 	alias da_archive_write_get_bytes_per_block = int function(archive*);
 	alias da_archive_write_set_bytes_in_last_block = int function(archive*,int);
 	alias da_archive_write_get_bytes_in_last_block = int function(archive*);
 	alias da_archive_write_set_skip_file = int function(archive*,la_int64_t,la_int64_t);
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		alias da_archive_write_set_compression_bzip2 = int function(archive*);
-		alias da_archive_write_set_compression_compress = int function(archive*);
-		alias da_archive_write_set_compression_gzip = int function(archive*);
-		alias da_archive_write_set_compression_lzip = int function(archive*);
-		alias da_archive_write_set_compression_lzma = int function(archive*);
-		alias da_archive_write_set_compression_none = int function(archive*);
-		alias da_archive_write_set_compression_program = int function(archive*,const(char)*);
-		alias da_archive_write_set_compression_xz = int function(archive*);
-	}
 	alias da_archive_write_add_filter = int function(archive*,int);
 	alias da_archive_write_add_filter_by_name = int function(archive*,const(char)*);
 	alias da_archive_write_add_filter_b64encode = int function(archive*);
@@ -180,7 +150,6 @@ extern(C) @system @nogc nothrow {
 	alias da_archive_write_open_fd = int function(archive*,int);
 	alias da_archive_write_open_filename = int function(archive*,const(char)*);
 	alias da_archive_write_open_filename_w = int function(archive*,const(wchar_t)*);
-	alias da_archive_write_open_file = int function(archive*,const(char)*);
 	alias da_archive_write_open_FILE = int function(archive*,FILE*);
 	alias da_archive_write_open_memory = int function(archive*,void*,size_t,size_t*);
 	alias da_archive_write_header = int function(archive*,archive_entry*);
@@ -190,9 +159,6 @@ extern(C) @system @nogc nothrow {
 	alias da_archive_write_close = int function(archive*);
 	alias da_archive_write_fail = int function(archive*);
 	alias da_archive_write_free = int function(archive*);
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		alias da_archive_write_finish = int function(archive*);
-	}
 	alias da_archive_write_set_format_option = int function(archive*,const(char)*,const(char)*,const(char)*);
 	alias da_archive_write_set_filter_option = int function(archive*,const(char)*,const(char)*,const(char)*);
 	alias da_archive_write_set_option = int function(archive*,const(char)*,const(char)*,const(char)*);
@@ -232,12 +198,6 @@ extern(C) @system @nogc nothrow {
 	alias da_archive_filter_count = la_int64_t function(archive*);
 	alias da_archive_filter_code = int function(archive*,int);
 	alias da_archive_filter_name = const(char)* function(archive*,int);
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		alias da_archive_position_compressed = la_int64_t function(archive*);
-		alias da_archive_position_uncompressed = la_int64_t function(archive*);
-		alias da_archive_compression_name = const(char)* function(archive*);
-		alias da_archive_compression = int function(archive*);
-	}
 	alias da_archive_errno = int function(archive*);
 	alias da_archive_error_string = const(char)* function(archive*);
 	alias da_archive_format_name = const(char)* function(archive*);
@@ -441,20 +401,6 @@ __gshared {
 	da_archive_bzlib_version archive_bzlib_version;
 	da_archive_liblz4_version archive_liblz4_version;
 	da_archive_read_new archive_read_new;
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		da_archive_read_support_compression_all archive_read_support_compression_all;
-		da_archive_read_support_compression_bzip2 archive_read_support_compression_bzip2;
-		da_archive_read_support_compression_compress archive_read_support_compression_compress;
-		da_archive_read_support_compression_gzip archive_read_support_compression_gzip;
-		da_archive_read_support_compression_lzip archive_read_support_compression_lzip;
-		da_archive_read_support_compression_lzma archive_read_support_compression_lzma;
-		da_archive_read_support_compression_none archive_read_support_compression_none;
-		da_archive_read_support_compression_program archive_read_support_compression_program;
-		da_archive_read_support_compression_program_signature archive_read_support_compression_program_signature;
-		da_archive_read_support_compression_rpm archive_read_support_compression_rpm;
-		da_archive_read_support_compression_uu archive_read_support_compression_uu;
-		da_archive_read_support_compression_xz archive_read_support_compression_xz;
-	}
 	da_archive_read_support_filter_all archive_read_support_filter_all;
 	da_archive_read_support_filter_bzip2 archive_read_support_filter_bzip2;
 	da_archive_read_support_filter_compress archive_read_support_filter_compress;
@@ -511,7 +457,6 @@ __gshared {
 	da_archive_read_open_filename archive_read_open_filename;
 	da_archive_read_open_filenames archive_read_open_filenames;
 	da_archive_read_open_filename_w archive_read_open_filename_w;
-	da_archive_read_open_file archive_read_open_file;
 	da_archive_read_open_memory archive_read_open_memory;
 	da_archive_read_open_memory2 archive_read_open_memory2;
 	da_archive_read_open_fd archive_read_open_fd;
@@ -538,25 +483,12 @@ __gshared {
 	da_archive_read_extract_set_skip_file archive_read_extract_set_skip_file;
 	da_archive_read_close archive_read_close;
 	da_archive_read_free archive_read_free;
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		da_archive_read_finish archive_read_finish;
-	}
 	da_archive_write_new archive_write_new;
 	da_archive_write_set_bytes_per_block archive_write_set_bytes_per_block;
 	da_archive_write_get_bytes_per_block archive_write_get_bytes_per_block;
 	da_archive_write_set_bytes_in_last_block archive_write_set_bytes_in_last_block;
 	da_archive_write_get_bytes_in_last_block archive_write_get_bytes_in_last_block;
 	da_archive_write_set_skip_file archive_write_set_skip_file;
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		da_archive_write_set_compression_bzip2 archive_write_set_compression_bzip2;
-		da_archive_write_set_compression_compress archive_write_set_compression_compress;
-		da_archive_write_set_compression_gzip archive_write_set_compression_gzip;
-		da_archive_write_set_compression_lzip archive_write_set_compression_lzip;
-		da_archive_write_set_compression_lzma archive_write_set_compression_lzma;
-		da_archive_write_set_compression_none archive_write_set_compression_none;
-		da_archive_write_set_compression_program archive_write_set_compression_program;
-		da_archive_write_set_compression_xz archive_write_set_compression_xz;
-	}
 	da_archive_write_add_filter archive_write_add_filter;
 	da_archive_write_add_filter_by_name archive_write_add_filter_by_name;
 	da_archive_write_add_filter_b64encode archive_write_add_filter_b64encode;
@@ -602,7 +534,6 @@ __gshared {
 	da_archive_write_open_fd archive_write_open_fd;
 	da_archive_write_open_filename archive_write_open_filename;
 	da_archive_write_open_filename_w archive_write_open_filename_w;
-	da_archive_write_open_file archive_write_open_file;
 	da_archive_write_open_FILE archive_write_open_FILE;
 	da_archive_write_open_memory archive_write_open_memory;
 	da_archive_write_header archive_write_header;
@@ -612,9 +543,6 @@ __gshared {
 	da_archive_write_close archive_write_close;
 	da_archive_write_fail archive_write_fail;
 	da_archive_write_free archive_write_free;
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		da_archive_write_finish archive_write_finish;
-	}
 	da_archive_write_set_format_option archive_write_set_format_option;
 	da_archive_write_set_filter_option archive_write_set_filter_option;
 	da_archive_write_set_option archive_write_set_option;
@@ -654,12 +582,6 @@ __gshared {
 	da_archive_filter_count archive_filter_count;
 	da_archive_filter_code archive_filter_code;
 	da_archive_filter_name archive_filter_name;
-	static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-		da_archive_position_compressed archive_position_compressed;
-		da_archive_position_uncompressed archive_position_uncompressed;
-		da_archive_compression_name archive_compression_name;
-		da_archive_compression archive_compression;
-	}
 	da_archive_errno archive_errno;
 	da_archive_error_string archive_error_string;
 	da_archive_format_name archive_format_name;
@@ -714,19 +636,6 @@ class DerelictLibArchiveLoader : SharedLibLoader {
 		bindFunc(cast(void**)&archive_bzlib_version,"archive_bzlib_version");
 		bindFunc(cast(void**)&archive_liblz4_version,"archive_liblz4_version");
 		bindFunc(cast(void**)&archive_read_new,"archive_read_new");
-		static if(ARCHIVE_VERSION_NUMBER < 4000000) { bindFunc(cast(void**)&archive_read_support_compression_all,"archive_read_support_compression_all");
-			bindFunc(cast(void**)&archive_read_support_compression_bzip2,"archive_read_support_compression_bzip2");
-			bindFunc(cast(void**)&archive_read_support_compression_compress,"archive_read_support_compression_compress");
-			bindFunc(cast(void**)&archive_read_support_compression_gzip,"archive_read_support_compression_gzip");
-			bindFunc(cast(void**)&archive_read_support_compression_lzip,"archive_read_support_compression_lzip");
-			bindFunc(cast(void**)&archive_read_support_compression_lzma,"archive_read_support_compression_lzma");
-			bindFunc(cast(void**)&archive_read_support_compression_none,"archive_read_support_compression_none");
-			bindFunc(cast(void**)&archive_read_support_compression_program,"archive_read_support_compression_program");
-			bindFunc(cast(void**)&archive_read_support_compression_program_signature,"archive_read_support_compression_program_signature");
-			bindFunc(cast(void**)&archive_read_support_compression_rpm,"archive_read_support_compression_rpm");
-			bindFunc(cast(void**)&archive_read_support_compression_uu,"archive_read_support_compression_uu");
-			bindFunc(cast(void**)&archive_read_support_compression_xz,"archive_read_support_compression_xz");
-		}
 		bindFunc(cast(void**)&archive_read_support_filter_all,"archive_read_support_filter_all");
 		bindFunc(cast(void**)&archive_read_support_filter_bzip2,"archive_read_support_filter_bzip2");
 		bindFunc(cast(void**)&archive_read_support_filter_compress,"archive_read_support_filter_compress");
@@ -783,7 +692,6 @@ class DerelictLibArchiveLoader : SharedLibLoader {
 		bindFunc(cast(void**)&archive_read_open_filename,"archive_read_open_filename");
 		bindFunc(cast(void**)&archive_read_open_filenames,"archive_read_open_filenames");
 		bindFunc(cast(void**)&archive_read_open_filename_w,"archive_read_open_filename_w");
-		bindFunc(cast(void**)&archive_read_open_file,"archive_read_open_file");
 		bindFunc(cast(void**)&archive_read_open_memory,"archive_read_open_memory");
 		bindFunc(cast(void**)&archive_read_open_memory2,"archive_read_open_memory2");
 		bindFunc(cast(void**)&archive_read_open_fd,"archive_read_open_fd");
@@ -810,25 +718,12 @@ class DerelictLibArchiveLoader : SharedLibLoader {
 		bindFunc(cast(void**)&archive_read_extract_set_skip_file,"archive_read_extract_set_skip_file");
 		bindFunc(cast(void**)&archive_read_close,"archive_read_close");
 		bindFunc(cast(void**)&archive_read_free,"archive_read_free");
-		static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-			bindFunc(cast(void**)&archive_read_finish,"archive_read_finish");
-		}
 		bindFunc(cast(void**)&archive_write_new,"archive_write_new");
 		bindFunc(cast(void**)&archive_write_set_bytes_per_block,"archive_write_set_bytes_per_block");
 		bindFunc(cast(void**)&archive_write_get_bytes_per_block,"archive_write_get_bytes_per_block");
 		bindFunc(cast(void**)&archive_write_set_bytes_in_last_block,"archive_write_set_bytes_in_last_block");
 		bindFunc(cast(void**)&archive_write_get_bytes_in_last_block,"archive_write_get_bytes_in_last_block");
 		bindFunc(cast(void**)&archive_write_set_skip_file,"archive_write_set_skip_file");
-		static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-			bindFunc(cast(void**)&archive_write_set_compression_bzip2,"archive_write_set_compression_bzip2");
-			bindFunc(cast(void**)&archive_write_set_compression_compress,"archive_write_set_compression_compress");
-			bindFunc(cast(void**)&archive_write_set_compression_gzip,"archive_write_set_compression_gzip");
-			bindFunc(cast(void**)&archive_write_set_compression_lzip,"archive_write_set_compression_lzip");
-			bindFunc(cast(void**)&archive_write_set_compression_lzma,"archive_write_set_compression_lzma");
-			bindFunc(cast(void**)&archive_write_set_compression_none,"archive_write_set_compression_none");
-			bindFunc(cast(void**)&archive_write_set_compression_program,"archive_write_set_compression_program");
-			bindFunc(cast(void**)&archive_write_set_compression_xz,"archive_write_set_compression_xz");
-		}
 		bindFunc(cast(void**)&archive_write_add_filter,"archive_write_add_filter");
 		bindFunc(cast(void**)&archive_write_add_filter_by_name,"archive_write_add_filter_by_name");
 		bindFunc(cast(void**)&archive_write_add_filter_b64encode,"archive_write_add_filter_b64encode");
@@ -874,7 +769,6 @@ class DerelictLibArchiveLoader : SharedLibLoader {
 		bindFunc(cast(void**)&archive_write_open_fd,"archive_write_open_fd");
 		bindFunc(cast(void**)&archive_write_open_filename,"archive_write_open_filename");
 		bindFunc(cast(void**)&archive_write_open_filename_w,"archive_write_open_filename_w");
-		bindFunc(cast(void**)&archive_write_open_file,"archive_write_open_file");
 		bindFunc(cast(void**)&archive_write_open_FILE,"archive_write_open_FILE");
 		bindFunc(cast(void**)&archive_write_open_memory,"archive_write_open_memory");
 		bindFunc(cast(void**)&archive_write_header,"archive_write_header");
@@ -884,9 +778,6 @@ class DerelictLibArchiveLoader : SharedLibLoader {
 		bindFunc(cast(void**)&archive_write_close,"archive_write_close");
 		bindFunc(cast(void**)&archive_write_fail,"archive_write_fail");
 		bindFunc(cast(void**)&archive_write_free,"archive_write_free");
-		static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-			bindFunc(cast(void**)&archive_write_finish,"archive_write_finish");
-		}
 		bindFunc(cast(void**)&archive_write_set_format_option,"archive_write_set_format_option");
 		bindFunc(cast(void**)&archive_write_set_filter_option,"archive_write_set_filter_option");
 		bindFunc(cast(void**)&archive_write_set_option,"archive_write_set_option");
@@ -926,12 +817,6 @@ class DerelictLibArchiveLoader : SharedLibLoader {
 		bindFunc(cast(void**)&archive_filter_count,"archive_filter_count");
 		bindFunc(cast(void**)&archive_filter_code,"archive_filter_code");
 		bindFunc(cast(void**)&archive_filter_name,"archive_filter_name");
-		static if(ARCHIVE_VERSION_NUMBER < 4000000) {
-			bindFunc(cast(void**)&archive_position_compressed,"archive_position_compressed");
-			bindFunc(cast(void**)&archive_position_uncompressed,"archive_position_uncompressed");
-			bindFunc(cast(void**)&archive_compression_name,"archive_compression_name");
-			bindFunc(cast(void**)&archive_compression,"archive_compression");
-		}
 		bindFunc(cast(void**)&archive_errno,"archive_errno");
 		bindFunc(cast(void**)&archive_error_string,"archive_error_string");
 		bindFunc(cast(void**)&archive_format_name,"archive_format_name");
