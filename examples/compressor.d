@@ -13,7 +13,7 @@ dub.json:
 +/
 /**
  * Compresses file
- * See Also: https://github.com/libarchive/libarchive/wiki/Examples#a-universal-decompressor
+ * See Also: https://github.com/libarchive/libarchive/wiki/Examples#a-basic-write-example
  */
 
 import derelict.libarchive;
