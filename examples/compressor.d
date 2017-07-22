@@ -7,8 +7,7 @@ dub.json:
 	"dependencies": {
 		"derelict-libarchive": {
 			"path": "./../"
-		},
-		"derelict-util": "~>3.0.0-beta.1"
+		}
 	}
 }
 +/
