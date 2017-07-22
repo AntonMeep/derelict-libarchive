@@ -174,7 +174,7 @@ extern(C) @system @nogc nothrow {
 	alias da_archive_read_disk_set_symlink_logical = int function(archive*);
 	alias da_archive_read_disk_set_symlink_physical = int function(archive*);
 	alias da_archive_read_disk_set_symlink_hybrid = int function(archive*);
-	alias da_archive_read_disk_entry_from_file = int function(archive*,archive_entry*,int,const(stat)*);
+	alias da_archive_read_disk_entry_from_file = int function(archive*,archive_entry*,int,const(stat_t)*);
 	alias da_archive_read_disk_gname = const(char)* function(archive*,la_int64_t);
 	alias da_archive_read_disk_uname = const(char)* function(archive*,la_int64_t);
 	alias da_archive_read_disk_set_standard_lookup = int function(archive*);
@@ -354,8 +354,8 @@ extern(C) @system @nogc nothrow {
 	alias da_archive_entry_update_uname_utf8 = int function(archive_entry*,const(char)*);
 	alias da_archive_entry_set_is_data_encrypted = void function(archive_entry*,char);
 	alias da_archive_entry_set_is_metadata_encrypted = void function(archive_entry*,char);
-	alias da_archive_entry_stat = const(stat)* function(archive_entry*);
-	alias da_archive_entry_copy_stat = void function(archive_entry*,const(stat)*);
+	alias da_archive_entry_stat = const(stat_t)* function(archive_entry*);
+	alias da_archive_entry_copy_stat = void function(archive_entry*,const(stat_t)*);
 	alias da_archive_entry_mac_metadata = const(void)* function(archive_entry*,size_t*);
 	alias da_archive_entry_copy_mac_metadata = void function(archive_entry*,const(void)*,size_t);
 	alias da_archive_entry_acl_clear = void function(archive_entry*);
