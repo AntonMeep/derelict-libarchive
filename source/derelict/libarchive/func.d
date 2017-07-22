@@ -1136,7 +1136,7 @@ class DerelictLibArchiveLoader : SharedLibLoader {
 		bindFunc(cast(void**)&archive_entry_acl_add_entry_w,"archive_entry_acl_add_entry_w");
 		bindFunc(cast(void**)&archive_entry_acl_reset,"archive_entry_acl_reset");
 		bindFunc(cast(void**)&archive_entry_acl_next,"archive_entry_acl_next");
-		bindFunc(cast(void**)&archive_entry_acl_next_w,"archive_entry_acl_next_w");
+		bindFunc(cast(void**)&archive_entry_acl_next_w,"archive_entry_acl_next_w", false);
 		bindFunc(cast(void**)&archive_entry_acl_to_text_w,"archive_entry_acl_to_text_w");
 		bindFunc(cast(void**)&archive_entry_acl_to_text,"archive_entry_acl_to_text");
 		bindFunc(cast(void**)&archive_entry_acl_from_text_w,"archive_entry_acl_from_text_w");
