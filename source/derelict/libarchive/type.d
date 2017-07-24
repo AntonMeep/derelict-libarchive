@@ -2,11 +2,21 @@ module derelict.libarchive.type;
 
 import std.conv : octal;
 public import core.sys.posix.config : c_long, c_ulong;
-public import core.sys.posix.sys.types : mode_t, dev_t, time_t;
-public import core.sys.posix.sys.stat : stat_t;
+
+version(Windows) {
+	pragma(msg, "|derelict-libarchive| Warning: This package isn't tested on Windows. If you have any problems, start an issue on GitHub");
+	public import core.sys.windows.winbase : BY_HANDLE_FILE_INFORMATION;
+	import core.sys.windows.stat : struct_stat;
+	alias stat_t = struct_stat;
+	alias mode_t = int;
+	alias dev_t = short;
+	alias time_t = c_long;
+} else {
+	public import core.sys.posix.sys.stat : stat_t;
+	public import core.sys.posix.sys.types : mode_t, dev_t, time_t;
+}
 public import core.stdc.stddef : wchar_t;
 public import core.stdc.stdio : FILE;
-version(Windows) public import core.sys.windows.winbase : BY_HANDLE_FILE_INFORMATION;
 
 extern(C) nothrow:
 
