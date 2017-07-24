@@ -1,6 +1,7 @@
 module derelict.libarchive.type;
 
 import std.conv : octal;
+public import core.sys.posix.config : c_long, c_ulong;
 public import core.sys.posix.sys.types : mode_t, dev_t, time_t;
 public import core.sys.posix.sys.stat : stat_t;
 public import core.stdc.stddef : wchar_t;
